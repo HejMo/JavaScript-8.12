@@ -1,0 +1,10 @@
+.container {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.title {
+	margin-bottom: 20px;
+}
+#js-gameTitle {
+	padding-bottom: 0;
+}
