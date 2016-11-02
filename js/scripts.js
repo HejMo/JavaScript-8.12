@@ -67,7 +67,7 @@ setGameElements();    // wywołanie funkcji
 // Nowa gra / Zagraj jeszcze raz --> rozpoczęcie każdej gry
 
 function newGame() {
-    gameWinner.innerHTML = '';
+    reset();
 	player.name = prompt('Graczu, wpisz swoje imię', 'imię gracza');
 	if (player.name) {
     	player.score = computer.score = 0;
@@ -77,6 +77,14 @@ function newGame() {
     	playerNameElem.innerHTML = player.name;
     	setGamePoints(); 
     }
+}
+
+function reset() {
+    gameWinner.innerHTML = '';
+    computerResultElem.innerHTML = 'Wynik komputera';
+    playerResultElem.innerHTML = 'Wynik gracza';
+    computerPickElem.innerHTML = 'Wybór komputera';
+    playerPickElem.innerHTML = 'Wybór gracza';
 }
 
 // Losowanie wyboru komputera
@@ -98,11 +106,12 @@ function checkRoundWinner(playerPick, computerPick) {
         (computerPick === 'paper' &&  playerPick === 'rock')) {
 
         setWinner(computerResultElem, computer);
+        return;
 
-    } else {
+    };
 
-        setWinner(playerResultElem, player); 
-    }
+    setWinner(playerResultElem, player); 
+    
 }
 
 function setWinner(element, winner) {
@@ -129,7 +138,7 @@ function setGamePoints() {
     playerPointsElem.innerHTML = player.score; 
     computerPointsElem.innerHTML = computer.score;
 
-    if (checkGameEnded() == true) {
+    if (checkGameEnded() === true) {
         announceWinnerGame();
     }
 }
@@ -148,7 +157,7 @@ function checkGameEnded() {
 function announceWinnerGame() {
     if (player.score === 3) {
         gameWinner.innerHTML += '<h4 class="text-center">WYGRAŁ GRACZ : ' + player.name + ' !!!</h4>';
-    } else if (computer.score === 3) {
+    } else {
         gameWinner.innerHTML += '<h4 class="text-center">WYGRAŁ GRACZ: computer !!!</h4>';
     }
     gameState = 'ended';
